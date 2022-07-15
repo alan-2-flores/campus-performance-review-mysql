@@ -1,0 +1,29 @@
+USE performanceReview;
+
+CREATE TABLE User(
+    Id INT NOT NULL AUTO_INCREMENT,
+    Name VARCHAR(150) NOT NULL,
+    FechaDeNacimiento DATE,
+    Edad INT,
+    CreateDate date default(CURRENT_DATE),
+    PRIMARY KEY (Id)
+);
+
+CREATE TABLE Role(
+    Id INT NOT NULL AUTO_INCREMENT,
+    ProfileName VARCHAR(150) NOT NULL,
+    PRIMARY KEY (Id)
+);
+
+CREATE TABLE UserRole(
+    Id INT NOT NULL AUTO_INCREMENT,
+    IdUser INT,
+    IdRole INT,
+    PRIMARY KEY (Id),
+    CONSTRAINT User_Role FOREIGN KEY (IdUser) REFERENCES User(Id)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    CONSTRAINT Role_User FOREIGN KEY (IdRole) REFERENCES Role(Id)
+	ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
